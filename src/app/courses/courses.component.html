@@ -1,0 +1,59 @@
+<div>
+    <!-- <app-search (searchTextChanged)="onSearchTextEntered($event)"></app-search> -->
+    <app-filter [total]="getTotal()" [courses]="getTotalCourses()" [movies]="getTotalMovies()"
+        (filterRadioButtonSelectionChanged)="onFilterRadioButtonChanged($event)"></app-filter>
+</div>
+<ng-container *ngIf="courseCountRadioButton === 'Courses' ; else Movies">
+    <ng-container *ngFor="let course of courses">
+        <!--  searchText === '' || course.name.toLowerCase().includes(searchText)-->
+        <div class="course-container">
+            <div class="course-card">
+                <div>
+                    <img [src]="course.image" style="width:220px; height:140px;">
+                </div>
+                <div class="course-name">
+                    <h4>{{ course.name}}</h4>
+                </div>
+                <div class="course-description">
+                    <p>{{course.description.slice(0, 80)}}...</p>
+                </div>
+                <div class="details">
+                    <div class="course-type" [ngStyle]="{color: course.type === 'Free' ? 'Green' : 'Red'}">
+                        {{course.type}}</div>
+                    <div class="course-price"><b>Price:</b> ${{course.price}}</div>
+                </div>
+                <div class="course-buttons">
+                    <button class="btn btn-buy" [appButtonColor]="'courses'">Buy Now</button>
+                    <button class="btn btn-show" [appButtonColor]="'courses'">Show Deatils</button>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</ng-container>
+    <ng-template #Movies>
+            <div class="course-container" *ngFor="let movie of movies">
+                <div class="course-card">
+                    <div>
+                        <img [src]="movie.image" style="width:220px; height:140px;">
+                    </div>
+                    <div class="course-name">
+                        <h4>{{ movie.name}}</h4>
+                    </div>
+                    <div class="course-description">
+                        <p>{{movie.description.slice(0, 80)}}...</p>
+                    </div>
+                    <div class="details">
+                        <div class="course-type" [ngStyle]="{color: movie.type === 'Free' ? 'Green' : 'Red'}">
+                            {{movie.type}}</div>
+                        <div class="course-price"><b>Price:</b> ${{movie.price}}</div>
+                    </div>
+                    <div class="course-buttons">
+                        <button class="btn btn-buy" [appButtonColor]="'movies'">Buy Now</button>
+                        <button class="btn btn-show" [appButtonColor]="'movies'">Show Deatils</button>
+                    </div>
+                </div>
+            </div>
+    </ng-template>
+  <ng-template [ngelse]>
+
+  </ng-template>
